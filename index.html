@@ -1,0 +1,317 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Journey to Mars – Interactive Storytelling</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="css/style.css" />
+</head>
+<body>
+
+<div id="progressBar"></div>
+
+<nav id="navDots" aria-label="Section navigation">
+  <div class="nav-dot active" data-section="0" tabindex="0" role="button" aria-label="Hero"></div>
+  <div class="nav-dot"        data-section="1" tabindex="0" role="button" aria-label="Launchpad"></div>
+  <div class="nav-dot"        data-section="2" tabindex="0" role="button" aria-label="Space"></div>
+  <div class="nav-dot"        data-section="3" tabindex="0" role="button" aria-label="Mars Landing"></div>
+  <div class="nav-dot"        data-section="4" tabindex="0" role="button" aria-label="Mars Surface"></div>
+  <div class="nav-dot"        data-section="5" tabindex="0" role="button" aria-label="Mission Complete"></div>
+</nav>
+
+<div class="bc-overlay" id="bcOverlay"></div>
+<div class="bc-card" id="bcCard" role="dialog" aria-modal="true">
+  <button class="bc-close" id="bcClose" aria-label="Close">✕</button>
+  <div class="bc-title" id="bcTitle"></div>
+  <div class="bc-body"  id="bcBody"></div>
+</div>
+
+<!-- SECTION 1 -->
+<section class="section" id="hero">
+  <div class="stars-container" id="heroStars"></div>
+
+  <div class="hero-content">
+    <h1 class="hero-title">Journey to Mars</h1>
+    <p class="hero-sub">
+      Embark on humanity's greatest adventure —
+      a 225&thinsp;million&thinsp;km voyage across the solar system to the Red Planet.
+    </p>
+
+    <div class="rocket-wrapper" id="heroRocket">
+      <svg viewBox="0 0 100 220" width="85" height="195" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <defs>
+          <linearGradient id="rBody" x1="22" y1="80" x2="78" y2="170" gradientUnits="userSpaceOnUse">
+            <stop offset="0%"   stop-color="#eceff1"/>
+            <stop offset="60%"  stop-color="#b0bec5"/>
+            <stop offset="100%" stop-color="#78909c"/>
+          </linearGradient>
+          <linearGradient id="rNose" x1="22" y1="10" x2="78" y2="80" gradientUnits="userSpaceOnUse">
+            <stop offset="0%"   stop-color="#fff"/>
+            <stop offset="100%" stop-color="#b0bec5"/>
+          </linearGradient>
+          <radialGradient id="rWin" cx="40%" cy="40%">
+            <stop offset="0%"   stop-color="#4fc3f7"/>
+            <stop offset="100%" stop-color="#01579b"/>
+          </radialGradient>
+        </defs>
+        <ellipse cx="50" cy="100" rx="28" ry="70" fill="url(#rBody)"/>
+        <path d="M50 10 C35 30,22 55,22 80 L78 80 C78 55,65 30,50 10Z" fill="url(#rNose)"/>
+        <circle cx="50" cy="90" r="12" fill="url(#rWin)" stroke="#a0c4ff" stroke-width="2"/>
+        <circle cx="50" cy="90" r="7"  fill="#00bcd4" opacity=".7"/>
+        <path d="M22 155 L4 185 L22 175Z"          fill="#1565c0"/>
+        <path d="M22 155 L22 175 L30 170 L30 150Z"  fill="#1976d2"/>
+        <path d="M78 155 L96 185 L78 175Z"          fill="#1565c0"/>
+        <path d="M78 155 L78 175 L70 170 L70 150Z"  fill="#1976d2"/>
+        <rect x="36" y="168" width="28" height="16" rx="4" fill="#37474f"/>
+        <rect x="40" y="172" width="20" height="8"  rx="3" fill="#263238"/>
+        <rect x="42" y="120" width="16" height="3"  rx="2" fill="rgba(255,255,255,.3)"/>
+        <rect x="38" y="135" width="24" height="5"  rx="1" fill="#c62828"/>
+        <rect x="38" y="135" width="8"  height="5"  rx="1" fill="#1565c0"/>
+      </svg>
+      <div class="rocket-flame"></div>
+    </div>
+
+    <button class="begin-btn" id="beginBtn">Begin Journey</button>
+  </div>
+
+</section>
+
+<!-- SECTION 2 -->
+<section class="section" id="launchpad">
+  <div class="stars-container" id="launchStars"></div>
+
+  <div class="launchpad-content">
+    <div class="earth-side">
+      <div class="earth-globe"></div>
+      <div class="earth-label">Earth</div>
+      <div class="earth-sub">Mission Origin<br/>Cape Canaveral, FL</div>
+    </div>
+
+    <div class="launchpad-right">
+      <div class="countdown-label">T-Minus</div>
+      <div class="countdown-display" id="countdownDisplay" aria-live="polite">05</div>
+      <div class="countdown-unit">SECONDS</div>
+
+      <div class="launchpad-rocket-area">
+        <svg id="launchpadRocket" class="launchpad-rocket" viewBox="0 0 70 160" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <defs>
+            <linearGradient id="lpBody" x1="15" y1="58" x2="55" y2="125" gradientUnits="userSpaceOnUse">
+              <stop offset="0%"   stop-color="#eceff1"/>
+              <stop offset="100%" stop-color="#78909c"/>
+            </linearGradient>
+            <linearGradient id="lpNose" x1="15" y1="8" x2="55" y2="58" gradientUnits="userSpaceOnUse">
+              <stop offset="0%"   stop-color="#fff"/>
+              <stop offset="100%" stop-color="#b0bec5"/>
+            </linearGradient>
+            <radialGradient id="lpWin" cx="40%" cy="40%">
+              <stop offset="0%"   stop-color="#4fc3f7"/>
+              <stop offset="100%" stop-color="#01579b"/>
+            </radialGradient>
+          </defs>
+          <ellipse cx="35" cy="75" rx="20" ry="50" fill="url(#lpBody)"/>
+          <path d="M35 8 C24 22,15 42,15 58 L55 58 C55 42,46 22,35 8Z" fill="url(#lpNose)"/>
+          <circle cx="35" cy="65" r="9" fill="url(#lpWin)" stroke="#a0c4ff" stroke-width="1.5"/>
+          <path d="M15 110 L2 134 L15 126Z"  fill="#1565c0"/>
+          <path d="M55 110 L68 134 L55 126Z" fill="#1565c0"/>
+          <rect x="26" y="120" width="18" height="12" rx="3" fill="#37474f"/>
+          <rect x="26" y="98"  width="18" height="3"  rx="2" fill="rgba(255,255,255,.2)"/>
+        </svg>
+        <div class="launchpad-platform"></div>
+      </div>
+
+      <button class="launch-btn" id="launchBtn">Initiate Launch</button>
+    </div>
+  </div>
+</section>
+
+<!-- SECTION 3 -->
+<section class="section" id="space" style="min-height:500vh; align-items:flex-start;">
+  <div class="space-inner">
+    <div class="space-sticky">
+      <div class="stars-container" id="spaceStars"></div>
+
+      <div class="distance-counter">
+        <div class="dist-label">Distance Travelled</div>
+        <div class="dist-value" id="distVal">0.0</div>
+        <div class="dist-unit">million km</div>
+      </div>
+
+      <div id="travelRocket" class="travel-rocket">
+        <svg viewBox="0 0 50 110" width="50" height="110" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <defs>
+            <linearGradient id="tvBody" x1="11" y1="42" x2="39" y2="90" gradientUnits="userSpaceOnUse">
+              <stop offset="0%"   stop-color="#eceff1"/>
+              <stop offset="100%" stop-color="#90a4ae"/>
+            </linearGradient>
+            <linearGradient id="tvNose" x1="11" y1="5" x2="39" y2="42" gradientUnits="userSpaceOnUse">
+              <stop offset="0%"   stop-color="#fff"/>
+              <stop offset="100%" stop-color="#cfd8dc"/>
+            </linearGradient>
+          </defs>
+          <ellipse cx="25" cy="55" rx="14" ry="35" fill="url(#tvBody)"/>
+          <path d="M25 5 C17 17,11 30,11 42 L39 42 C39 30,33 17,25 5Z" fill="url(#tvNose)"/>
+          <circle cx="25" cy="48" r="7" fill="#4fc3f7" opacity=".8"/>
+          <path d="M11 78 L2 96 L11 90Z"  fill="#1565c0"/>
+          <path d="M39 78 L48 96 L39 90Z" fill="#1565c0"/>
+          <rect x="19" y="85" width="12" height="8" rx="2" fill="#37474f"/>
+        </svg>
+        <div class="travel-flame"></div>
+      </div>
+
+      <div id="planetsContainer"></div>
+    </div>
+  </div>
+</section>
+
+<!-- SECTION 4 -->
+<section class="section" id="mars-landing">
+  <div class="mars-sky"></div>
+  <div class="mars-ground"></div>
+  <div class="mars-dustline"></div>
+  <div class="stars-container" id="marsStars" style="opacity:.4;"></div>
+
+  <div class="landing-content">
+    <div class="descent-wrap" id="descentWrap">
+      <svg viewBox="0 0 180 120" width="180" height="120" xmlns="http://www.w3.org/2000/svg">
+        <path d="M10 100 Q20 20,90 20 Q160 20,170 100" fill="none" stroke="#e91e63" stroke-width="4"/>
+        <path d="M30 90 Q55 22,90 20"   fill="none" stroke="white" stroke-width="2.5" opacity=".5"/>
+        <path d="M90 20 Q125 22,150 90"  fill="none" stroke="white" stroke-width="2.5" opacity=".5"/>
+        <line x1="30"  y1="90"  x2="70"  y2="107" stroke="white" stroke-width="1.5" opacity=".6"/>
+        <line x1="90"  y1="96"  x2="90"  y2="109" stroke="white" stroke-width="1.5" opacity=".6"/>
+        <line x1="150" y1="90"  x2="110" y2="107" stroke="white" stroke-width="1.5" opacity=".6"/>
+      </svg>
+      <!-- Rover -->
+      <svg class="landing-rover-svg" viewBox="0 0 120 70" xmlns="http://www.w3.org/2000/svg">
+        <rect x="20" y="15" width="80" height="35" rx="6" fill="#8d6e63"/>
+        <rect x="25" y="10" width="70" height="12" rx="4" fill="#a1887f"/>
+        <rect x="5"  y="8"  width="20" height="18" rx="2" fill="#1565c0"/>
+        <rect x="95" y="8"  width="20" height="18" rx="2" fill="#1565c0"/>
+        <line x1="60" y1="10" x2="60" y2="-5" stroke="#78909c" stroke-width="3"/>
+        <circle cx="60" cy="-5" r="5" fill="#546e7a"/>
+        <circle cx="30" cy="52" r="10" fill="#5d4037" stroke="#78909c" stroke-width="2"/>
+        <circle cx="30" cy="52" r="5"  fill="#78909c"/>
+        <circle cx="60" cy="54" r="11" fill="#5d4037" stroke="#78909c" stroke-width="2"/>
+        <circle cx="60" cy="54" r="5"  fill="#78909c"/>
+        <circle cx="90" cy="52" r="10" fill="#5d4037" stroke="#78909c" stroke-width="2"/>
+        <circle cx="90" cy="52" r="5"  fill="#78909c"/>
+        <text x="50" y="35" text-anchor="middle" font-size="7" fill="white" font-weight="bold" font-family="monospace">NASA</text>
+      </svg>
+    </div>
+
+    <div class="landing-status" id="landingStatus" aria-live="polite">🔴 Entering Mars atmosphere…</div>
+    <button class="explore-btn" id="exploreBtn">Explore Mars 🪐</button>
+  </div>
+</section>
+
+<!-- SECTION 5 -->
+<section class="section" id="mars-surface">
+  <div class="surface-sky"></div>
+
+  <div class="terrain">
+    <svg viewBox="0 0 1440 400" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg">
+      <defs>
+        <linearGradient id="tg" x1="0" y1="0" x2="0" y2="1">
+          <stop offset="0%"   stop-color="#9c3d1c"/>
+          <stop offset="40%"  stop-color="#7a2a12"/>
+          <stop offset="100%" stop-color="#2e0a04"/>
+        </linearGradient>
+        <linearGradient id="tg3" x1="0" y1="0" x2="0" y2="1">
+          <stop offset="0%"   stop-color="#b84a1a"/>
+          <stop offset="100%" stop-color="#5c1e08"/>
+        </linearGradient>
+        <radialGradient id="craterG" cx="50%" cy="40%" r="50%">
+          <stop offset="0%"   stop-color="#3a1008" stop-opacity=".8"/>
+          <stop offset="100%" stop-color="transparent"/>
+        </radialGradient>
+      </defs>
+      <path d="M0 210 Q80 182,160 195 Q240 210,320 182 Q400 158,480 174 Q560 192,640 160 Q700 140,760 155 Q820 170,900 158 Q980 146,1060 168 Q1140 188,1220 172 Q1300 158,1380 178 Q1410 186,1440 182 L1440 400 L0 400Z" fill="url(#tg)"/>
+      <path d="M0 240 Q120 225,200 235 Q300 248,400 230 Q500 215,600 232 Q700 248,800 228 Q900 210,1000 228 Q1100 244,1200 232 Q1340 216,1440 228 L1440 400 L0 400Z" fill="url(#tg3)" opacity=".5"/>
+      <path d="M50 208 L70 175 L90 192 L100 180 L115 208Z" fill="#7a2a12"/>
+      <path d="M300 185 L320 155 L342 172 L355 160 L370 185Z" fill="#6b2210"/>
+      <path d="M680 162 L700 128 L718 148 L728 135 L745 162Z" fill="#7a2a12"/>
+      <path d="M1080 172 L1100 142 L1118 160 L1130 148 L1148 172Z" fill="#6b2210"/>
+      <path d="M1350 180 L1370 150 L1385 168 L1395 155 L1415 180Z" fill="#7a2a12"/>
+      <ellipse cx="220"  cy="220" rx="35" ry="10" fill="url(#craterG)"/>
+      <ellipse cx="220"  cy="220" rx="35" ry="10" fill="none" stroke="#5c1e08" stroke-width="2" opacity=".5"/>
+      <ellipse cx="750"  cy="180" rx="28" ry="8"  fill="url(#craterG)"/>
+      <ellipse cx="750"  cy="180" rx="28" ry="8"  fill="none" stroke="#5c1e08" stroke-width="2" opacity=".5"/>
+      <ellipse cx="1260" cy="200" rx="32" ry="9"  fill="url(#craterG)"/>
+      <ellipse cx="1260" cy="200" rx="32" ry="9"  fill="none" stroke="#5c1e08" stroke-width="2" opacity=".5"/>
+      <path d="M0 210 Q80 182,160 195 Q240 210,320 182 Q400 158,480 174 Q560 192,640 160 Q700 140,760 155 Q820 170,900 158 Q980 146,1060 168 Q1140 188,1220 172 Q1300 158,1380 178 Q1410 186,1440 182" fill="none" stroke="rgba(220,120,60,.3)" stroke-width="3"/>
+    </svg>
+  </div>
+
+  <div class="surface-heading">
+    <h2>Exploration Database</h2>
+    <p>Click a discovery badge to learn more. Watch the rover investigate each site.</p>
+  </div>
+
+  <div class="badges-fixed" id="badgesFixed">
+    <button class="badge badge-olympus" data-badge="olympus"    aria-label="Olympus Mons">
+      <span class="bi">△</span><span class="bt">Olympus Mons</span>
+    </button>
+    <button class="badge badge-valles"  data-badge="valles"     aria-label="Valles Marineris">
+      <span class="bi">≋</span><span class="bt">Valles Marineris</span>
+    </button>
+    <button class="badge badge-water"   data-badge="water"      aria-label="Water Ice">
+      <span class="bi">💧</span><span class="bt">Water Ice</span>
+    </button>
+    <button class="badge badge-moons"   data-badge="moons"      aria-label="Two Moons">
+      <span class="bi">🌙</span><span class="bt">Two Moons</span>
+    </button>
+    <button class="badge badge-atmo"    data-badge="atmosphere" aria-label="Atmosphere">
+      <span class="bi">🌀</span><span class="bt">Atmosphere</span>
+    </button>
+  </div>
+
+  <div class="surface-rover-track">
+    <svg id="surfaceRoverSvg" class="surface-rover-svg"
+         viewBox="0 0 120 70" xmlns="http://www.w3.org/2000/svg" aria-label="Mars rover">
+      <rect x="20" y="15" width="80" height="35" rx="6" fill="#8d6e63"/>
+      <rect x="25" y="10" width="70" height="12" rx="4" fill="#a1887f"/>
+      <rect x="5"  y="8"  width="20" height="18" rx="2" fill="#1565c0"/>
+      <rect x="95" y="8"  width="20" height="18" rx="2" fill="#1565c0"/>
+      <line x1="60" y1="10" x2="60" y2="-5" stroke="#78909c" stroke-width="3"/>
+      <circle cx="60" cy="-5" r="5" fill="#546e7a"/>
+      <circle cx="30" cy="52" r="10" fill="#5d4037" stroke="#78909c" stroke-width="2"/>
+      <circle cx="30" cy="52" r="5"  fill="#78909c"/>
+      <circle cx="60" cy="54" r="11" fill="#5d4037" stroke="#78909c" stroke-width="2"/>
+      <circle cx="60" cy="54" r="5"  fill="#78909c"/>
+      <circle cx="90" cy="52" r="10" fill="#5d4037" stroke="#78909c" stroke-width="2"/>
+      <circle cx="90" cy="52" r="5"  fill="#78909c"/>
+      <text x="50" y="35" text-anchor="middle" font-size="7" fill="white" font-weight="bold" font-family="monospace">NASA</text>
+    </svg>
+  </div>
+
+  <div id="dustParticles" style="position:absolute;inset:0;pointer-events:none;z-index:1;"></div>
+</section>
+
+<!-- SECTION 6 -->
+<section class="section" id="mission-complete">
+  <div class="stars-container" id="completeStars"></div>
+  <div id="completeParticles" style="position:absolute;inset:0;pointer-events:none;z-index:1;"></div>
+
+  <div class="complete-content">
+    <div class="trophy">🏆</div>
+    <h2 class="complete-title">Mission Successfully<br/>Completed</h2>
+    <p class="complete-desc">
+      Against all odds, humanity has achieved the impossible. Our rover has traversed
+      the alien terrain of Mars, collected invaluable scientific data, and brought us
+      one giant leap closer to becoming a multi-planetary species.
+    </p>
+    <div class="complete-achievements">
+      <span>✓ Water Detected</span>
+      <span>✓ Atmosphere Analysed</span>
+      <span>✓ Biology Samples</span>
+      <span>✓ Geology Mapped</span>
+    </div>
+    <button class="return-btn" id="returnBtn">↩ Return to Earth</button>
+  </div>
+</section>
+
+<script src="js/main.js"></script>
+</body>
+</html>
